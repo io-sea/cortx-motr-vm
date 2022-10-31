@@ -21,14 +21,20 @@ set -eu -o pipefail
 
 #version
 version=${1:-2.0.0-606}
-echo $version
+echo "version: $version"
+#github token
+ghtoken=${2:-}
+echo "ghtoken: $ghtoken"
 echo "setting up $version..."
+
 
 #local repo setup
 cd ~
 curl -L https://github.com/shailesh-vaidya/cortx-motr/releases/download/"$version"/set-local-repo.sh -o set-local-repo.sh
 chmod a+x set-local-repo.sh
-sudo ./set-local-repo.sh shailesh-vaidya/cortx-motr "$version"
+export GITHUB_TOKEN="$ghtoken"
+echo "<$GITHUB_TOKEN>"
+sudo -E ./set-local-repo.sh shailesh-vaidya/cortx-motr "$version"
 ls /etc/yum.repos.d/ /var/tmp/
 cd -
 echo "done"
