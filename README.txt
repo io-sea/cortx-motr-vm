@@ -5,7 +5,7 @@ Installation instructions
 ################################################################################
 
 # Setup local Cortx rpm repo.
- ./install-cortx-repo.sh 2.0.0-6068
+ ./install-cortx-repo.sh 2.0.0-6068 [Github token]
 
 # Install Cortx rpms
 sudo yum install -y cortx-hare
