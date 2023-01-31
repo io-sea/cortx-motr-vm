@@ -30,3 +30,5 @@ then
 fi
 
 sudo echo "networks=$1($2)" > /etc/libfab.conf
+(set -x; cat /etc/libfab.conf)
+
