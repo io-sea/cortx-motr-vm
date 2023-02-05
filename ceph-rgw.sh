@@ -58,4 +58,4 @@ sudo /usr/bin/radosgw -f --name client.rgw --no-mon-config &
  
 #AWS s3 commands
 #Execute s3 commands, preferably in another console
-./s3aws.sh
+#./s3aws.sh
