@@ -18,15 +18,29 @@
 #
 
 #!/bin/bash 
-set -x
 
-#Kill rgw
-#Start/restart motr
+cleanup()
+{
+	rm -rf /tmp/hastatus.yaml
+}
+trap cleanup EXIT
+
+### Kill rgw
+### Start/restart motr
 #sudo pkill -9 radosgw
-sudo hctl shutdown
-./disks.sh
-sudo hctl bootstrap --mkfs ./singlenode.yaml
-hctl status
+#sudo hctl shutdown
+#./disks.sh
+#sudo hctl bootstrap --mkfs ./singlenode.yaml
+#hctl status
+
+set +x
+hctl status &> /tmp/hastatus.yaml
+if grep -q "Cluster is not running" "/tmp/hastatus.yaml"; then
+    echo "the cluster is not running!"
+    echo "start the cluster first!!"
+    exit
+fi
+set -x
 
 #Create ceph config file
 conf_file=/etc/ceph/ceph.conf
